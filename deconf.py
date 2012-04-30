@@ -1,7 +1,7 @@
 class RequiredParameterError(Exception): pass
 class CyclicalDependencyError(Exception): pass
 
-class Configurable(object):
+class Deconfigurable(object):
     '''
     A class that has rich(ish) keyword-parameter handling including explicit
     handling of required parameters and declaration of parameter dependencies.

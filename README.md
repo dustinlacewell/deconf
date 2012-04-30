@@ -69,4 +69,18 @@ Example:
     )
 
 
+Where Domain is implemented as:
+
+    class Domain(Configurable):
+        @parameter('hostname', required=True)
+        def _arg_hostname(self, kwargs):
+            self.hostname = kwargs.get('hostname')
+            return self.hostname
+
+        @parameter('resource', required=True)
+        def _arg_resource(self, kwargs):
+            self.resource = kwargs.get('resource')
+            return self.resource
+
+
 
