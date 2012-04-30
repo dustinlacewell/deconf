@@ -17,6 +17,7 @@ decorated methods performs the processing specific to that parameter.
     ...    return self.foo
 
 REQUIRED PARAMETERS:
+--------------------
 
 Parameters are required by default. This means that a RequiredParameterError
 will be raised if the `Configurable.__init__` doesn't recieve the designated
@@ -33,6 +34,7 @@ the parameter does not return a default value then None will be used.
 
 
 DEPENDENCY PARAMETERS:
+----------------------
    
 Sometimes we will want to defer processing of a parameter until some other
 parameter has been processed first. To do so, simply pass a list of
@@ -42,3 +44,5 @@ dependencies, `depends_on`, to `@parameter`.
     >>> def handle_bar(self, kwargs):
     ...     self.bar = kwargs.get('bar')
     ...     return self.bar
+
+
