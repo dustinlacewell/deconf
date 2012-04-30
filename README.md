@@ -16,7 +16,7 @@ decorated methods performs the processing specific to that parameter.
     ...    self.foo = kwargs.get('foo')
     ...    return self.foo
 
-REQUIRED PARAMETERS:
+Required Parameters:
 --------------------
 
 Parameters are required by default. This means that a RequiredParameterError
@@ -33,7 +33,7 @@ the parameter does not return a default value then None will be used.
     ...    return self.foo
 
 
-DEPENDENCY PARAMETERS:
+Dependency Parameters:
 ----------------------
    
 Sometimes we will want to defer processing of a parameter until some other
@@ -44,5 +44,29 @@ dependencies, `depends_on`, to `@parameter`.
     >>> def handle_bar(self, kwargs):
     ...     self.bar = kwargs.get('bar')
     ...     return self.bar
+
+Example:
+-------
+
+    from twisted.web.static import File
+    from twisted.web.proxy import ReverseProxyResource
+
+    from spidersilk import Domain, Httpd
+
+    application = Httpd(
+        port = 80,
+        default = 'ldlework.com',
+        domains = [
+            Domain(
+                hostname='ldlework.com',
+                resource=File('/var/txweb/ldlework.com'),
+            ),
+            Domain(
+                hostname='lichen.ldlework.com',
+                resource=ReverseProxyResource('localhost', 8088, ''),
+            ),
+        ],
+    )
+
 
 
