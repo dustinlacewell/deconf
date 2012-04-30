@@ -19,11 +19,11 @@ decorated methods performs the processing specific to that parameter.
 REQUIRED PARAMETERS:
 
 Parameters are required by default. This means that a RequiredParameterError
-will be raised if the Configurable.__init__ doesn't recieve the designated
+will be raised if the `Configurable.__init__` doesn't recieve the designated
 named argument. 
 
-Passing `required=False` to @parameter will prevent the parameter from
-raising RequiredParameterError if the parameter isn't provided a value. If
+Passing `required=False` to `@parameter` will prevent the parameter from
+raising `RequiredParameterError` if the parameter isn't provided a value. If
 the parameter does not return a default value then None will be used.
 
     >>> @parameter('foo', required=False)
@@ -36,7 +36,7 @@ DEPENDENCY PARAMETERS:
    
 Sometimes we will want to defer processing of a parameter until some other
 parameter has been processed first. To do so, simply pass a list of
-dependencies, `depends_on`, to @parameter.
+dependencies, `depends_on`, to `@parameter`.
 
     >>> @parameter('bar', depends_on=('foo', ))
     >>> def handle_bar(self, kwargs):
