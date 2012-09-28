@@ -1,7 +1,15 @@
+import os, imp
+
 class RequiredParameterError(Exception): pass
 class CyclicalDependencyError(Exception): pass
 class ParameterTypeError(Exception): pass
 class ParameterValueError(Exception): pass
+
+def load_config(filename):
+    basename = os.path.basename(filename)
+    parts = basename.split('.')
+    modname = parts[0]
+    return imp.load_source(modname, os.path.abspath(filename))
 
 class Deconfigurable(object):
     '''
@@ -175,4 +183,3 @@ def parameter(param, depends_on=tuple(), ensure_type=None, default=Undefined):
         wrapper.__dependencies__ = depends_on
         return wrapper
     return decorator
-    
