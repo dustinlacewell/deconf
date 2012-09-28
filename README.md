@@ -3,8 +3,10 @@ deconf
 
 An object system for building declarative configurations in Python.
 
-A class that has rich(ish) keyword-parameter handling including explicit
-handling of required parameters and declaration of parameter dependencies.
+A class that has rich(ish) keyword-parameter handling, including 
+[explicit handling of required parameters](https://github.com/dustinlacewell/deconf#pass-through-parameters),
+[declaration of parameter dependencies](https://github.com/dustinlacewell/deconf#dependency-parameters) and
+[basic type-checking](https://github.com/dustinlacewell/deconf#type-checked-parameters).
 
 Keyword parameter processing will be performed for any method on the
 Deconfigurable that is decorated with the 'parameter' decorator. Each of these
