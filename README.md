@@ -79,6 +79,7 @@ dependencies, `depends_on`, to @parameter.
 
 
 Contrived Example:
+------------------
 
     class Person(Deconfigurable):
         @staticmethod
