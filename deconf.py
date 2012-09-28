@@ -151,23 +151,28 @@ class Deconfigurable(object):
 
         self._param_vals[param] = method(kwargs)
 
-def parameter(param, required=True, depends_on=tuple(), ensure_type=None):
+class Undefined(object): pass
+
+def parameter(param, depends_on=tuple(), ensure_type=None, default=Undefined):
     def decorator(f):
         def wrapper(self, kwargs):
-            if required and param not in kwargs:
-                msg = "'%s' object missing required '%s' parameter."
-                ctx = (self.__class__.__name__, param)
-                raise RequiredParameterError(msg % ctx)
-            if ensure_type and not isinstance(kwargs[param], ensure_type):
+            if param in kwargs:
+                val = kwargs[param]
+            else:
+                if default != Undefined:
+                    val = default
+                else:
+                    msg = "'%s' object missing required '%s' parameter."
+                    ctx = (self.__class__.__name__, param)
+                    raise RequiredParameterError(msg % ctx)
+            if ensure_type and not isinstance(val, ensure_type):
                 msg = "'{0}' parameter must be a '{1}' instance."
                 raise ParameterTypeError(msg.format(param, ensure_type))
-            val = f(self, kwargs[param])
-            if val:
-                setattr(self, param, val)
-            else:
-                setattr(self, param, kwargs[param])
+            retval = f(self, val)
+            setattr(self, param, retval or val)
+
         wrapper.__param__ = param
-        wrapper.__required__ = required
         wrapper.__dependencies__ = depends_on
         return wrapper
     return decorator
+    
