@@ -9,7 +9,7 @@ A class that has rich(ish) keyword-parameter handling, including
 [basic type-checking](https://github.com/dustinlacewell/deconf#type-checked-parameters).
 
 Keyword parameter processing will be performed for any method on the
-Deconfigurable that is decorated with the 'parameter' decorator. Each of these
+`Deconfigurable` that is decorated with the `@parameter` decorator. Each of these
 decorated methods performs the processing specific to that parameter. The 
 returned value is then assigned on the appropriately named attribute.
 
@@ -35,12 +35,12 @@ a parameter method that passes, and `value` will be used as is.
 Required Parameters:
 --------------------
 
-Parameters are required by default. This means that a RequiredParameterError
-will be raised if the Deconfigurable.__init__ doesn't recieve the designated
+Parameters are required by default. This means that a `RequiredParameterError`
+will be raised if the `Deconfigurable.__init__` doesn't recieve the designated
 named argument. 
 
-Passing `default=` to @parameter will prevent the parameter from
-raising RequiredParameterError if the parameter isn't provided a value.
+Passing `default=` to `@parameter` will prevent the parameter from
+raising `RequiredParameterError` if the parameter isn't provided a value.
 
 
     >>> @parameter('foo', default='bar')
@@ -52,9 +52,9 @@ Type-Checked Parameters:
 ------------------------
 
 A basic mechanism is supplied for ensuring that the passed parameter value
-is of a specific type. By supplying a type value to the @parameter's
+is of a specific type. By supplying a type value to the `@parameter`'s
 `ensure_type` keyword arguement any value passed in will be validated with
-an isinstance check.
+an *isinstance check*.
 
 
     >>> @parameter('bars', ensure_type=list)
@@ -67,7 +67,7 @@ Dependency Parameters:
    
 Sometimes we will want to defer processing of a parameter until some other
 parameter has been processed first. To do so, simply pass a list of
-dependencies, `depends_on`, to @parameter.
+dependencies, `depends_on`, to `@parameter`.
 
 
     >>> @parameter('foo')

@@ -9,7 +9,7 @@ class Deconfigurable(object):
     handling of required parameters and declaration of parameter dependencies.
 
     Keyword parameter processing will be performed for any method on the
-    Deconfigurable that is decorated with the 'parameter' decorator. Each of these
+    Deconfigurable that is decorated with the `@parameter` decorator. Each of these
     decorated methods performs the processing specific to that parameter. The 
     returned value is then assigned on the appropriately named attribute.
 
@@ -21,7 +21,7 @@ class Deconfigurable(object):
     PASS-THROUGH PARAMETERS:
 
     If your parameter doesn't require any special treatment and should simply
-    be stored on the Deconfigurable a shorthand can be used. Simply decorate 
+    be stored on the `Deconfigurable` a shorthand can be used. Simply decorate 
     a parameter method that passes, and `value` will be used as is.
 
     >>> @parameter('foo')
