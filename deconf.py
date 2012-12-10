@@ -9,7 +9,9 @@ def load_config(filename):
     basename = os.path.basename(filename)
     parts = basename.split('.')
     modname = parts[0]
-    return imp.load_source(modname, os.path.abspath(filename))
+    path = os.path.abspath(filename)
+    if os.path.exists(path):
+        return imp.load_source(modname, path)
 
 class Deconfigurable(object):
     '''
