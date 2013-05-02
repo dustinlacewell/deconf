@@ -168,6 +168,9 @@ def parameter(param, depends_on=tuple(), ensure_type=None, default=Undefined):
         def wrapper(self, kwargs):
             if param in kwargs:
                 val = kwargs[param]
+                if ensure_type and not isinstance(val, ensure_type):
+                    msg = "'{0}' parameter must be a '{1}' instance."
+                    raise ParameterTypeError(msg.format(param, ensure_type))
             else:
                 if default != Undefined:
                     val = default
@@ -175,12 +178,8 @@ def parameter(param, depends_on=tuple(), ensure_type=None, default=Undefined):
                     msg = "'%s' object missing required '%s' parameter."
                     ctx = (self.__class__.__name__, param)
                     raise RequiredParameterError(msg % ctx)
-            if ensure_type and not isinstance(val, ensure_type):
-                msg = "'{0}' parameter must be a '{1}' instance."
-                raise ParameterTypeError(msg.format(param, ensure_type))
             retval = f(self, val)
             setattr(self, param, retval or val)
-
         wrapper.__param__ = param
         wrapper.__dependencies__ = depends_on
         return wrapper
